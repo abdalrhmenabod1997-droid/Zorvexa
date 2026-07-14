@@ -1,12 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("Zorvexa بدأ العمل بنجاح.");
+    console.log("Zorvexa جاهزة");
 
-    const button = document.querySelector(".btn");
-
-    if (button) {
-        button.addEventListener("click", (e) => {
-            e.preventDefault();
-            alert("مرحبًا بك في Zorvexa! هذه مجرد البداية 🚀");
+    document.querySelectorAll("button").forEach(btn => {
+        btn.addEventListener("click", () => {
+            alert("هذه ميزة تجريبية، وسيتم ربطها بالنظام الحقيقي لاحقًا.");
         });
-    }
+    });
 });
