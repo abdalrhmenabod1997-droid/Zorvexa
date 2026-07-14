@@ -1,53 +1,46 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getArticle } from "../services/articleService";
 
-import MainLayout from "./layouts/MainLayout";
+export default function Article() {
+  const { slug } = useParams();
 
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+  const [article, setArticle] = useState(null);
 
-function NotFound() {
+  useEffect(() => {
+    const loadArticle = async () => {
+      try {
+        const data = await getArticle(slug);
+        setArticle(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    loadArticle();
+  }, [slug]);
+
+  if (!article) {
+    return <h2>جاري تحميل المقال...</h2>;
+  }
+
   return (
-    <MainLayout>
-      <h1>404</h1>
-      <p>الصفحة غير موجودة.</p>
-    </MainLayout>
-  );
-}
+    <div className="container">
 
-export default function App() {
-  return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <MainLayout>
-            <Home />
-          </MainLayout>
-        }
+      <h1>{article.title}</h1>
+
+      <p style={{ color: "#38bdf8" }}>
+        {article.category}
+      </p>
+
+      <hr />
+
+      <div
+        dangerouslySetInnerHTML={{
+          __html: article.content
+        }}
       />
 
-      <Route
-        path="/login"
-        element={
-          <MainLayout>
-            <Login />
-          </MainLayout>
-        }
-      />
-
-      <Route
-        path="/register"
-        element={
-          <MainLayout>
-            <Register />
-          </MainLayout>
-        }
-      />
-
-      <Route path="/404" element={<NotFound />} />
-
-      <Route path="*" element={<Navigate to="/404" replace />} />
-    </Routes>
+    </div>
   );
 }
