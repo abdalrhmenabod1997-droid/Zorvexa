@@ -1,51 +1,27 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
-function Home() {
-  return (
-    <div style={{ padding: "40px" }}>
-      <h1>Zorvexa</h1>
-      <p>منصة احترافية تعتمد على الذكاء الاصطناعي.</p>
-    </div>
-  );
-}
+import Home from "./pages/Home";
 
 function Login() {
-  return (
-    <div style={{ padding: "40px" }}>
-      <h1>تسجيل الدخول</h1>
-    </div>
-  );
+  return <h1 style={{padding:"40px"}}>تسجيل الدخول</h1>;
 }
 
 function Register() {
-  return (
-    <div style={{ padding: "40px" }}>
-      <h1>إنشاء حساب</h1>
-    </div>
-  );
+  return <h1 style={{padding:"40px"}}>إنشاء حساب</h1>;
+}
+
+function NotFound() {
+  return <h1 style={{padding:"40px"}}>404 | الصفحة غير موجودة</h1>;
 }
 
 export default function App() {
   return (
-    <>
-      <nav
-        style={{
-          display: "flex",
-          gap: "20px",
-          padding: "20px",
-          background: "#111827"
-        }}
-      >
-        <Link to="/">الرئيسية</Link>
-        <Link to="/login">تسجيل الدخول</Link>
-        <Link to="/register">إنشاء حساب</Link>
-      </nav>
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/404" element={<NotFound />} />
+      <Route path="*" element={<Navigate to="/404" replace />} />
+    </Routes>
   );
 }
