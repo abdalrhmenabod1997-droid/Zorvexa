@@ -1,17 +1,16 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import Home from "./pages/Home";
-
-function Login() {
-  return <h1 style={{padding:"40px"}}>تسجيل الدخول</h1>;
-}
-
-function Register() {
-  return <h1 style={{padding:"40px"}}>إنشاء حساب</h1>;
-}
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function NotFound() {
-  return <h1 style={{padding:"40px"}}>404 | الصفحة غير موجودة</h1>;
+  return (
+    <div className="container" style={{ padding: "80px 20px", textAlign: "center" }}>
+      <h1>404</h1>
+      <p>الصفحة غير موجودة.</p>
+    </div>
+  );
 }
 
 export default function App() {
