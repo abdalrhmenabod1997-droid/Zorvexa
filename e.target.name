@@ -1,0 +1,70 @@
+import { useState } from "react";
+
+export default function CreateArticle() {
+  const [form, setForm] = useState({
+    title: "",
+    category: "",
+    excerpt: "",
+    content: ""
+  });
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(form);
+
+    alert("سيتم ربط إنشاء المقال بالـ Backend لاحقًا.");
+  };
+
+  return (
+    <div className="container">
+      <h1>إنشاء مقال جديد</h1>
+
+      <form onSubmit={handleSubmit} className="card">
+
+        <input
+          type="text"
+          name="title"
+          placeholder="عنوان المقال"
+          onChange={handleChange}
+          required
+        />
+
+        <input
+          type="text"
+          name="category"
+          placeholder="التصنيف"
+          onChange={handleChange}
+          required
+        />
+
+        <textarea
+          name="excerpt"
+          placeholder="ملخص المقال"
+          rows="4"
+          onChange={handleChange}
+        />
+
+        <textarea
+          name="content"
+          placeholder="محتوى المقال"
+          rows="12"
+          onChange={handleChange}
+          required
+        />
+
+        <button className="btn" type="submit">
+          نشر المقال
+        </button>
+
+      </form>
+    </div>
+  );
+}
